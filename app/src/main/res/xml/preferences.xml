@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="pref_remember_percent"
+        android:title="Check box preference" />
+    <ListPreference
+        android:defaultValue="1"
+        android:entries="@array/rounding_keys"
+        android:entryValues="@array/rounding_values"
+        android:key="pref_rounding"
+        android:title="List preference" />
+</PreferenceScreen>
