@@ -33,9 +33,11 @@ public class TipCalculatorActivity extends Activity
     private Button percentDownButton;
     private TextView tipTextView;
     private TextView totalTextView;
+    private TextView dispName;
 
     // define the SharedPreferences object
     private SharedPreferences savedValues;
+
 
     // define instance variables that should be saved
     private String billAmountString = "";
@@ -55,6 +57,7 @@ public class TipCalculatorActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tip_calculator);
 
+
         // get references to the widgets
         billAmountEditText = (EditText) findViewById(R.id.billAmountEditText);
         percentTextView = (TextView) findViewById(R.id.percentTextView);
@@ -62,23 +65,30 @@ public class TipCalculatorActivity extends Activity
         percentDownButton = (Button) findViewById(R.id.percentDownButton);
         tipTextView = (TextView) findViewById(R.id.tipTextView);
         totalTextView = (TextView) findViewById(R.id.totalTextView);
+        dispName=(TextView) findViewById(R.id.dispName);
 
         // set the listeners
         billAmountEditText.setOnEditorActionListener(this);
         percentUpButton.setOnClickListener(this);
         percentDownButton.setOnClickListener(this);
 
+
         // get SharedPreferences object
         savedValues = getSharedPreferences("SavedValues", MODE_PRIVATE);
+
 
         // set the default values for the preferences
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
         // get default SharedPreferences object
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        dispName.setText(prefs.getString("edit_text_preference_1"," "));
+
     }
 
-    @Override
+
+
+        @Override
     public void onPause() {
         // save the instance variables       
         Editor editor = savedValues.edit();
@@ -93,7 +103,7 @@ public class TipCalculatorActivity extends Activity
     public void onResume() {
         super.onResume();
 
-
+        dispName.setText(prefs.getString("edit_text_preference_1"," "));
         // get preferences
         rememberTipPercent = prefs.getBoolean("pref_forget_percent", true);
         rounding = Integer.parseInt(prefs.getString("pref_rounding", "0"));
@@ -111,16 +121,16 @@ public class TipCalculatorActivity extends Activity
 
         // set the bill amount on its widget
         billAmountEditText.setText(billAmountString);
-
+        dispName.getText();
 
         // calculate and display
         calculateAndDisplay();
     }
 
     public void calculateAndDisplay() {
-       Toast.makeText(getApplicationContext(), "In Calc and Display", Toast.LENGTH_LONG).show();
+       Toast.makeText(getApplicationContext(), " calc", Toast.LENGTH_LONG).show();
 
-
+        dispName.setText(prefs.getString("edit_text_preference_1"," "));
         // get the bill amount
         billAmountString = billAmountEditText.getText().toString();
         float billAmount;
